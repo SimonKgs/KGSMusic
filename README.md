@@ -1,9 +1,6 @@
-Esto es un proyecto de  [Next.js](https://nextjs.org/) iniciado con [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Es una aplicación web para escuchar música online.
-
-Este es mi proyecto para el ciclo formativo de desarrollo de aplicaciones web, hay muchas cosas que mejorar y
-alguna otra que arreglar pero por el momento esta funcionando.
+Este es mi proyecto para el ciclo formativo de desarrollo de aplicaciones web, es una aplicación para escuchar música online
+me baso en spotify el diseño y obtengo las canciones de Deezer, son muestras de 30s.
 
 # Getting Started
 
