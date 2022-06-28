@@ -1,0 +1,61 @@
+//  This is your Prisma schema file,
+//  learn more about it in the docs: https://pris.ly/d/prisma-schema
+//  Schema de prisma para la base de datos
+//  Aqui estand definidos los modelos y los datos de cada uno, además de las relaciones entre tablas
+generator client {
+  provider = "prisma-client-js"
+}
+
+//  conexiones
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+//  user relaciona con playlists
+model User {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  email     String     @unique
+  firstName String
+  lastName  String
+  password  String
+  role      String
+  playlists Playlist[]
+}
+
+//song relacionada con artist y en playlist
+model Song {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String
+  artist    Artist     @relation(fields: [artistId], references: [id])
+  artistId  Int
+  playlists Playlist[]
+  duration  Int
+  url       String
+}
+
+//el artist esta relacionado con song
+//el campo song[] es la dependencia
+model Artist {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  songs     Song[]
+  name      String   @unique
+}
+
+//plaliste relacionado con song y user
+model Playlist {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  songs     Song[]
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
